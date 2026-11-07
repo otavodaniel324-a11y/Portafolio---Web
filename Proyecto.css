@@ -1,5 +1,5 @@
 /* ============================================================
-   RESET Y VARIABLES GLOBALES
+   RESET Y VARIABLES (Mismo estilo que tu portafolio)
    ============================================================ */
 *,
 *::before,
@@ -39,7 +39,6 @@ body {
     position: relative;
 }
 
-/* Rejilla animada de fondo */
 body::before {
     content: "";
     position: fixed;
@@ -54,32 +53,9 @@ body::before {
     z-index: -2;
 }
 
-/* Partículas brillantes flotantes */
-body::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background-image:
-        radial-gradient(2px 2px at 20% 30%, var(--azul-electrico), transparent),
-        radial-gradient(2px 2px at 70% 60%, var(--morado-neon), transparent),
-        radial-gradient(1.5px 1.5px at 40% 80%, var(--verde-neon), transparent),
-        radial-gradient(2px 2px at 90% 15%, var(--azul-electrico), transparent),
-        radial-gradient(1.5px 1.5px at 10% 70%, var(--morado-neon), transparent);
-    background-size: 300px 300px;
-    opacity: 0.6;
-    animation: flotarParticulas 25s linear infinite;
-    pointer-events: none;
-    z-index: -1;
-}
-
 @keyframes moverRejilla {
     from { background-position: 0 0; }
     to   { background-position: 0 600px; }
-}
-
-@keyframes flotarParticulas {
-    from { background-position: 0 0; }
-    to   { background-position: 300px -600px; }
 }
 
 /* ============================================================
@@ -90,7 +66,7 @@ header {
     top: 0;
     z-index: 100;
     backdrop-filter: blur(14px);
-    background: rgba(5, 6, 10, 0.7);
+    background: rgba(5, 6, 10, 0.85);
     border-bottom: 1px solid var(--borde-neon);
     box-shadow: 0 0 25px rgba(0, 229, 255, 0.15);
     animation: bajarHeader 1s ease-out both;
@@ -101,442 +77,218 @@ header {
     to   { transform: translateY(0); opacity: 1; }
 }
 
-nav ul {
-    list-style: none;
+nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
     display: flex;
-    justify-content: center;
-    padding: 1rem;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
 }
 
-nav a {
-    position: relative;
-    text-decoration: none;
-    color: var(--blanco-humo);
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 0.5rem 1.4rem;
-    transition: color 0.3s ease, text-shadow 0.3s ease;
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
-nav a::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    width: 0;
-    height: 2px;
+.logo-container img {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid var(--azul-electrico);
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+}
+
+.logo-container span {
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
     background: linear-gradient(90deg, var(--azul-electrico), var(--morado-neon));
-    transform: translateX(-50%);
-    transition: width 0.35s ease;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-nav a:hover {
-    color: var(--azul-electrico);
-    text-shadow: 0 0 12px var(--azul-electrico);
+.enlace-proyecto {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
-nav a:hover::after {
-    width: 100%;
+.enlace-proyecto p {
+    font-size: 0.9rem;
+    color: rgba(232, 246, 255, 0.7);
+    letter-spacing: 1px;
+}
+
+.enlace-proyecto a {
+    text-decoration: none;
+    color: var(--negro-profundo);
+    background: var(--verde-neon);
+    padding: 0.6rem 1.4rem;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(57, 255, 136, 0.4);
+}
+
+.enlace-proyecto a:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 25px rgba(57, 255, 136, 0.7);
+    background: #fff;
+    color: var(--negro-profundo);
 }
 
 /* ============================================================
-   CONTENEDOR 3D PRINCIPAL
+   CONTENIDO PRINCIPAL Y GALERÍA
    ============================================================ */
 main {
     flex: 1;
-    padding: 2.5rem 1.5rem;
+    padding: 3rem 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
 }
 
-.contenedor-3d {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 2.5rem;
-    border-radius: 24px;
+.galeria-proyectos {
+    display: grid;
+    /* Crea columnas automáticas que se adaptan al tamaño de la pantalla */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+/* ============================================================
+   TARJETAS (EFECTO 3D Y NEÓN)
+   ============================================================ */
+.tarjeta {
+    position: relative;
     background: var(--gris-panel);
     border: 1px solid var(--borde-neon);
-    box-shadow:
-        0 0 40px rgba(0, 229, 255, 0.12),
-        0 0 80px rgba(184, 77, 255, 0.10),
-        inset 0 0 60px rgba(0, 229, 255, 0.04);
-    backdrop-filter: blur(10px);
-    transform-style: preserve-3d;
-    animation: aparecerContenedor 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
-    position: relative;
+    border-radius: 20px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.05);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    backdrop-filter: blur(8px);
     overflow: hidden;
+    opacity: 0;
+    animation: aparecerTarjeta 0.8s ease-out forwards;
 }
 
-.contenedor-3d::before {
+/* Retraso de animación escalonado para cada tarjeta */
+.tarjeta:nth-child(1) { animation-delay: 0.1s; }
+.tarjeta:nth-child(2) { animation-delay: 0.2s; }
+.tarjeta:nth-child(3) { animation-delay: 0.3s; }
+.tarjeta:nth-child(4) { animation-delay: 0.4s; }
+.tarjeta:nth-child(5) { animation-delay: 0.5s; }
+.tarjeta:nth-child(6) { animation-delay: 0.6s; }
+.tarjeta:nth-child(7) { animation-delay: 0.7s; }
+
+@keyframes aparecerTarjeta {
+    from { opacity: 0; transform: translateY(30px) scale(0.95); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Brillo interior de la tarjeta */
+.tarjeta::before {
     content: "";
     position: absolute;
     top: -50%;
     left: -50%;
     width: 200%;
     height: 200%;
-    background: conic-gradient(from 0deg, transparent, rgba(0, 229, 255, 0.08), transparent 25%);
-    animation: girarBrillo 10s linear infinite;
+    background: conic-gradient(from 0deg, transparent, rgba(184, 77, 255, 0.1), transparent 30%);
+    animation: girarBrillo 8s linear infinite;
     pointer-events: none;
-}
-
-@keyframes aparecerContenedor {
-    from { opacity: 0; transform: translateY(40px) scale(0.96); }
-    to   { opacity: 1; transform: translateY(0) scale(1); }
+    z-index: 0;
 }
 
 @keyframes girarBrillo {
     to { transform: rotate(360deg); }
 }
 
-/* ============================================================
-   FOTO DE PERFIL (CUADRADA Y SIN LUCES)
-   ============================================================ */
-.foto-perfil {
-    display: block;
-    width: 170px;
-    height: 170px;
-    object-fit: cover;
-    /* Marco cuadrado con esquinas ligeramente redondeadas */
-    border-radius: 12px; 
-    margin: 0 auto 2rem;
-    /* Borde sólido sutil sin gradientes */
-    border: 2px solid rgba(0, 229, 255, 0.4); 
-    /* Sin sombras ni resplandores */
-    box-shadow: none; 
-    background: transparent;
-    /* Solo animación de flotación, sin rotación de color */
-    animation: flotarFoto 5s ease-in-out infinite;
-    transition: transform 0.4s ease;
+.tarjeta:hover {
+    transform: translateY(-10px);
+    border-color: var(--morado-neon);
+    box-shadow: 
+        0 10px 30px rgba(184, 77, 255, 0.3),
+        0 0 20px rgba(0, 229, 255, 0.2);
 }
 
-.foto-perfil:hover {
-    /* Hover sutil sin luces */
-    transform: scale(1.05); 
-}
-
-@keyframes flotarFoto {
-    0%, 100% { translate: 0 0; }
-    50%      { translate: 0 -12px; }
-}
-
-/* ============================================================
-   TEXTOS Y ETIQUETAS
-   ============================================================ */
-.etiqueta {
-    display: inline-block;
-    font-size: 0.85rem;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--azul-electrico);
-    padding: 0.35rem 1rem;
-    border: 1px solid var(--azul-electrico);
-    border-radius: 999px;
-    margin-bottom: 1rem;
-    box-shadow: 0 0 18px rgba(0, 229, 255, 0.35);
-    animation: pulsoEtiqueta 2.5s ease-in-out infinite;
-}
-
-@keyframes pulsoEtiqueta {
-    0%, 100% { box-shadow: 0 0 12px rgba(0, 229, 255, 0.3); }
-    50%      { box-shadow: 0 0 28px rgba(0, 229, 255, 0.7); }
-}
-
-.bienvenida {
-    font-size: 1.35rem;
-    font-weight: 300;
-    margin-bottom: 1.6rem;
-    color: #c7e9ff;
-}
-
-.subtitulo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin: 2.2rem 0 1rem;
-    background: linear-gradient(90deg, var(--azul-electrico), var(--morado-neon), var(--verde-neon));
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: brilloTexto 4s linear infinite;
-}
-
-@keyframes brilloTexto {
-    to { background-position: 200% center; }
-}
-
-/* ============================================================
-   TARJETA DE INFORMACIÓN
-   ============================================================ */
-.tarjeta-info {
-    position: relative;
-    padding: 1.6rem 1.8rem;
-    border-radius: 18px;
-    background: rgba(0, 229, 255, 0.05);
-    border-left: 4px solid var(--azul-electrico);
-    box-shadow: inset 0 0 30px rgba(0, 229, 255, 0.08);
-    transition: transform 0.35s ease, box-shadow 0.35s ease;
-    animation: deslizarIzquierda 1s ease-out 0.3s both;
-}
-
-.tarjeta-info:hover {
-    transform: translateX(6px);
-    box-shadow:
-        inset 0 0 30px rgba(0, 229, 255, 0.15),
-        -6px 0 25px rgba(0, 229, 255, 0.2);
-}
-
-.texto-perfil {
-    line-height: 1.75;
-    font-size: 1rem;
-    color: #d8f1ff;
-    text-align: justify;
-}
-
-@keyframes deslizarIzquierda {
-    from { opacity: 0; transform: translateX(-40px); }
-    to   { opacity: 1; transform: translateX(0); }
-}
-
-/* ============================================================
-   LISTA DE HABILIDADES
-   ============================================================ */
-.Habilidades {
-    list-style: none;
-    display: grid;
-    gap: 0.9rem;
-    margin-top: 1.2rem;
-}
-
-.Habilidades li {
-    position: relative;
-    padding: 1rem 1.2rem 1rem 3rem;
-    border-radius: 14px;
-    background: linear-gradient(120deg, rgba(184, 77, 255, 0.10), rgba(0, 229, 255, 0.05));
-    border: 1px solid rgba(184, 77, 255, 0.25);
-    font-size: 0.98rem;
-    line-height: 1.5;
-    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-    opacity: 0;
-    animation: aparecerHabilidad 0.7s ease-out forwards;
-}
-
-.Habilidades li:nth-child(1) { animation-delay: 0.5s; }
-.Habilidades li:nth-child(2) { animation-delay: 0.65s; }
-.Habilidades li:nth-child(3) { animation-delay: 0.8s; }
-.Habilidades li:nth-child(4) { animation-delay: 0.95s; }
-
-.Habilidades li::before {
-    content: "▹";
-    position: absolute;
-    left: 1.1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--verde-neon);
-    font-size: 1.2rem;
-    text-shadow: 0 0 10px var(--verde-neon);
-}
-
-.Habilidades li:hover {
-    transform: translateX(8px) scale(1.01);
-    border-color: var(--azul-electrico);
-    box-shadow: 0 0 25px rgba(0, 229, 255, 0.25);
-}
-
-.Habilidades strong {
-    color: var(--azul-electrico);
-}
-
-@keyframes aparecerHabilidad {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ============================================================
-   INFO EXTRA + GALERÍA
-   ============================================================ */
-.info-extra {
-    margin-top: 2.5rem;
-    padding-top: 2rem;
-    border-top: 1px dashed rgba(0, 229, 255, 0.25);
-}
-
-.info-extra h3 {
-    font-size: 1.35rem;
-    margin-bottom: 1.4rem;
-    color: var(--verde-neon);
-    text-shadow: 0 0 15px rgba(57, 255, 136, 0.5);
-}
-
-.galeria-info {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    align-items: flex-start;
-}
-
-.img-normal,
-.desplegable-img summary img {
-    width: 100%;
-    max-width: 340px;
-    border-radius: 16px;
-    border: 2px solid rgba(0, 229, 255, 0.35);
-    box-shadow: 0 0 30px rgba(0, 229, 255, 0.2);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    display: block;
-}
-
-.img-normal:hover,
-.desplegable-img summary img:hover {
-    transform: scale(1.04);
-    box-shadow: 0 0 45px rgba(184, 77, 255, 0.5);
-}
-
-/* Desplegable */
-.desplegable-img {
-    flex: 1;
-    min-width: 280px;
-}
-
-.desplegable-img summary {
-    list-style: none;
-    cursor: pointer;
-    border-radius: 16px;
-    position: relative;
-}
-
-.desplegable-img summary::-webkit-details-marker {
-    display: none;
-}
-
-.desplegable-img summary::after {
-    content: "▼ Ver detalles";
-    position: absolute;
-    bottom: 12px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(5, 6, 10, 0.8);
-    color: var(--azul-electrico);
-    font-size: 0.75rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 0.35rem 0.9rem;
-    border-radius: 999px;
-    border: 1px solid var(--azul-electrico);
-    transition: opacity 0.3s ease;
-}
-
-.desplegable-img[open] summary::after {
-    content: "▲ Cerrar";
-}
-
-.contenido-desplegable {
-    margin-top: 1.2rem;
-    padding: 1.4rem 1.5rem;
-    border-radius: 16px;
-    background: rgba(184, 77, 255, 0.06);
-    border: 1px solid rgba(184, 77, 255, 0.3);
-    animation: abrirDesplegable 0.5s ease-out;
-}
-
-@keyframes abrirDesplegable {
-    from { opacity: 0; transform: translateY(-12px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
-
-.contenido-desplegable h4 {
-    color: var(--morado-neon);
-    margin-bottom: 0.7rem;
+/* Título de la tarjeta */
+.tarjeta h3 {
     font-size: 1.1rem;
-    text-shadow: 0 0 12px rgba(184, 77, 255, 0.5);
-}
-
-.contenido-desplegable p {
-    line-height: 1.7;
-    font-size: 0.95rem;
-    color: #d8f1ff;
-    margin-bottom: 0.9rem;
-}
-
-.contenido-desplegable ul {
-    list-style: none;
-    display: grid;
-    gap: 0.5rem;
-}
-
-.contenido-desplegable ul li {
-    position: relative;
-    padding-left: 1.6rem;
-    font-size: 0.92rem;
-    color: #b8e0ff;
-}
-
-.contenido-desplegable ul li::before {
-    content: "✦";
-    position: absolute;
-    left: 0;
-    color: var(--verde-neon);
-    text-shadow: 0 0 8px var(--verde-neon);
-}
-
-/* ============================================================
-   FOOTER
-   ============================================================ */
-footer {
+    font-weight: 600;
     text-align: center;
-    padding: 1.5rem;
-    font-size: 0.85rem;
-    letter-spacing: 2px;
-    color: rgba(232, 246, 255, 0.6);
-    border-top: 1px solid var(--borde-neon);
-    background: rgba(5, 6, 10, 0.6);
-    backdrop-filter: blur(10px);
+    color: var(--blanco-humo);
+    letter-spacing: 1px;
+    z-index: 1;
+    text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+    transition: color 0.3s ease;
 }
 
-footer p {
-    animation: latirFooter 3s ease-in-out infinite;
+.tarjeta:hover h3 {
+    color: var(--azul-electrico);
 }
 
-@keyframes latirFooter {
-    0%, 100% { opacity: 0.6; }
-    50%      { opacity: 1; text-shadow: 0 0 12px var(--azul-electrico); }
+/* Imagen de la tarjeta */
+.tarjeta img {
+    width: 100%;
+    height: 200px; /* Altura fija para uniformidad */
+    object-fit: cover;
+    border-radius: 12px;
+    border: 2px solid rgba(0, 229, 255, 0.2);
+    z-index: 1;
+    transition: transform 0.4s ease, border-color 0.4s ease;
+}
+
+.tarjeta:hover img {
+    transform: scale(1.03);
+    border-color: var(--azul-electrico);
 }
 
 /* ============================================================
    RESPONSIVE
    ============================================================ */
-@media (max-width: 640px) {
-    .contenedor-3d {
-        padding: 1.5rem;
-        border-radius: 18px;
-    }
-
-    .foto-perfil {
-        width: 130px;
-        height: 130px;
-    }
-
-    .bienvenida {
-        font-size: 1.1rem;
-    }
-
-    .subtitulo {
-        font-size: 1.25rem;
-    }
-
-    .galeria-info {
+@media (max-width: 768px) {
+    nav {
         flex-direction: column;
+        text-align: center;
+        padding: 1rem;
     }
 
-    .img-normal,
-    .desplegable-img summary img {
-        max-width: 100%;
+    .logo-container {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .enlace-proyecto {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .galeria-proyectos {
+        grid-template-columns: 1fr; /* Una sola columna en móviles */
+    }
+
+    .tarjeta img {
+        height: auto; /* Permite que la imagen mantenga su proporción */
+        max-height: 250px;
     }
 }
 
-/* Accesibilidad: respeta preferencias de movimiento reducido */
+/* Accesibilidad */
 @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
+    *, *::before, *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
